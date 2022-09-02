@@ -24,4 +24,8 @@ Same as above but use `terraform plan -var-file=filename`
 
 ### Env
 
-`export TF_VAR_var_name="var_value"
+Use prefix `TF_VAR_*`:
+
+```
+export TF_VAR_var_name="var_value"
+```
