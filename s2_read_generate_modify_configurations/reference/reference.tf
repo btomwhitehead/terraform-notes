@@ -1,6 +1,5 @@
 provider "aws" {
   region     = "us-west-2"
-  profile = "terraform"
 }
 
 resource "aws_instance" "myec2" {

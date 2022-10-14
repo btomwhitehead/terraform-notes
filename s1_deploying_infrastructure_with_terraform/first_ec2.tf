@@ -10,7 +10,6 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region  = "us-east-1"
-  profile = "terraform"
 }
 
 # Images have different IDs in different regions, so its best to
