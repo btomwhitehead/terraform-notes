@@ -1,12 +1,35 @@
 # Syntax
 
-## Configuration syntax
+## HCL configuration syntax
 
 ### Arguments
 
+An argument assigns an argument value to a particular argument name:
+```
+image_id = "abc123"
+```
+
 ### Blocks
 
+A block is a container for other content:
+```
+block_type "label_1" ... "label_n" {
+  argument_name_1 = argument_value_1
+
+  another_block {
+    # ...
+  }
+}
+```
+- A block has a type specified as the first keyword.
+- Each block type defines how many labels must follow the type keyword.
+- The block body is delimited by the { and } characters. Within the block body,
+  further arguments and blocks may be nested.
+
 ### Identifiers
+
+Argument names, block type names, and the names of most Terraform-specific constructs
+like resources, input variables, etc. are all identifiers.
 
 ### Comments
 
@@ -169,13 +192,13 @@ resource "azurerm_resource_group" "rg" {
   location = each.value
 }
 ```
+
 Example: Iterate over a set of user names:
 ```
 resource "aws_iam_user" "the-accounts" {
   for_each = toset( ["Todd", "James", "Alice", "Dottie"] )
   name     = each.key
 }
-
 ```
 
 ## Splat expression
@@ -232,4 +255,3 @@ resource "aws_security_group" "dynamicsg" {
   }
 }
 ```
-
