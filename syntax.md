@@ -38,7 +38,7 @@ Use `#` for single line by default. Terraform will also accept
 
 ## Expressions
 
-### [functions](https://developer.hashicorp.com/terraform/language/functions)
+### [Functions](https://developer.hashicorp.com/terraform/language/functions)
 
 The Terraform language has a number of built-in functions that can be used in expressions to
 transform and combine values. These are similar to the operators but all follow a common syntax:
@@ -60,6 +60,10 @@ is equivalent to:
 ```
 min(55, 2453, 2)
 ```
+### [Strings and templates](https://developer.hashicorp.com/terraform/language/expressions/strings)
+
+TODO
+
 ### [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
 Syntax is of the form:
@@ -74,11 +78,11 @@ be an expression that uses the equality, comparison, or logical operators.
 
 The two result values may be of any type, but they must both be of the same type.
 
-### [for](https://developer.hashicorp.com/terraform/language/expressions/for)
+### [For](https://developer.hashicorp.com/terraform/language/expressions/for)
 
 TODO
 
-### [arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
+### [Arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
 
 TODO
 
@@ -97,7 +101,7 @@ This is equivalent to the following splat expression:
 var.list[*].id
 ```
 
-### [dynamic blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks)
+### [Dynamic blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks)
 
 Dynamically construct repeateable nested blocks using an iterator over a list or map variable.
 
