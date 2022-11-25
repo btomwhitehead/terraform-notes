@@ -45,9 +45,6 @@ resource "aws_security_group" "demo_sg" {
 ### dynamic-block.tf
 
 ```sh
-
-
-
 variable "sg_ports" {
   type        = list(number)
   description = "list of ingress ports"
