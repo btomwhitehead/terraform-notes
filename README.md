@@ -9,16 +9,6 @@ Terrraform generally loads all the config files with extensions `.tf` or
 Theres no real notion of namespacing without using terraform modules. Resource
 names are required to be unique across modules or the entire workspace.
 
-## Terraform output
-
-Used to return values of an output variable from the state file.
-
-```
-output "some_name" {
-  value = some.resource.name
-}
-```
-
 ## Terraform settings
 
 What is set in the `terraform {}` block. Options include:
@@ -43,3 +33,6 @@ large infrastructure. The following tips can help reduce the total API calls:
 
 ### Challenges with `count` meta-argument
 
+Count paramerters can create issues when indexing over lists if the underlying
+list is modified. It is preferable to use maps and a for_each iterator when
+possible.

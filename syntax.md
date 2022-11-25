@@ -6,7 +6,46 @@
 ### data types
 ### maps
 ### lists
-### count, count_index
+
+Store multiple items as a single variable in a sequential order. Lists are
+indexed.
+
+## sets
+
+Sets are used to store multiple items as a single variable. Sets are unordered
+and each element must be unique. Types also need to be the same, so mixed type
+elements will be cast to the most general type .
+
+Defining a set with curly brackets:
+```
+{"foo", "bar"}
+[
+  "bar",
+  "foo",
+]
+```
+
+The [toset](https://developer.hashicorp.com/terraform/language/functions/toset)
+function casts a list of elements to a set.
+
+Casting a list of mixed types to set:
+```
+toset(["foo", "bar", 1])
+[
+  "bar",
+  "foo",
+  "1",
+]
+```
+
+Note that `toset()` will purge duplicates:
+```
+toset(["foo", "bar", "foo"])
+[
+  "bar",
+  "foo",
+]
+```
 
 ## Conditional expressions
 
@@ -27,7 +66,43 @@ Construct a map from a list of keys and list of values:
 }
 ```
 
-## for_each iterator
+## Meta-arguments
+
+### `providers`
+
+### `depends_on`
+
+### `count`
+
+### `for_each`
+
+Iterate over a map or set of strings.
+
+In blocks where for_each is set, an additional each object is available in expressions,
+so you can modify the configuration of each instance. This object has two attributes:
+
+- `each.key` — The map key (or set member) corresponding to this instance
+- `each.value` — The map value corresponding to this instance
+
+Example: iterate over a map of group names to locations:
+```
+resource "azurerm_resource_group" "rg" {
+  for_each = {
+    a_group = "eastus"
+    another_group = "westus2"
+  }
+  name     = each.key
+  location = each.value
+}
+```
+Example: Iterate over a set of user names:
+```
+resource "aws_iam_user" "the-accounts" {
+  for_each = toset( ["Todd", "James", "Alice", "Dottie"] )
+  name     = each.key
+}
+
+```
 
 ## Splat expression
 
@@ -87,8 +162,3 @@ resource "aws_security_group" "dynamicsg" {
 
 Use `#` for single line by default. Terraform will also accept
 `//` for single lines, `/*` and `*/` for multi-line.
-
-## SET
-
-## for_each
-
