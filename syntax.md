@@ -74,6 +74,12 @@ Construct a map from a list of keys and list of values:
 
 ### `count`
 
+TODO
+
+Count paramerters can create issues when indexing over lists if the underlying
+list is modified. It is preferable to use maps/ sets and a for_each iterator where
+possible.
+
 ### `for_each`
 
 Iterate over a map or set of strings.

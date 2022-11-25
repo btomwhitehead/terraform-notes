@@ -1,4 +1,15 @@
-# terraform-course-notes
+# terraform notes
+
+## Index
+
+1. [cli](./cli.md)
+2. [syntax](./syntax.md)
+3. [variables](./variables.md)
+4. [data sources](./data_sources.md)
+5. [resources](./resources.md)
+6. [outputs](./outputs.md)
+7. [modules](./modules.md)
+
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
 
 ## Load order and Semantics
@@ -30,9 +41,3 @@ large infrastructure. The following tips can help reduce the total API calls:
 - Bypass the refresh step of plan / apply with `-refresh=false` flag.
 - Specify specific targets that you want to modify, that are resources, resource
   instances or modules using the `-target=resouce` flag.
-
-### Challenges with `count` meta-argument
-
-Count paramerters can create issues when indexing over lists if the underlying
-list is modified. It is preferable to use maps and a for_each iterator when
-possible.
