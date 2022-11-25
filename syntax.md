@@ -205,7 +205,7 @@ Note: There are only built in functions, there is no support for user defined fu
 
 ### Expanding Function Arguments
 
-List / set / tuple function arguments can be expanded using the `...`  syntax,
+List / set / tuple function arguments can be expanded using the `...` syntax,
 e.g.
 ```
 min([55, 2453, 2]...)
@@ -231,19 +231,53 @@ The two result values may be of any type, but they must both be of the same type
 
 ## Meta-arguments
 
-### `providers`
+Meta-argumenrts are special constructs in Terraform which are available for Resource and Module
+blocks to simplify configurations.
+
+### [provider](https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider)
+
+The provider meta-argument specifies which provider configuration to use for a resource, overriding
+Terraform's default behavior of selecting one based on the resource type name. Its value should
+be an unquoted `<PROVIDER>.<ALIAS>` reference.
+```
+provider "aws" {
+  region = "us-west-1"
+}
+
+provider "aws" {
+  alias  = "usw2"
+  region = "us-west-2"
+}
+
+module "example" {
+  source    = "./example"
+  providers = {
+    aws = aws.usw2
+  }
+}
+```
 
 ### `depends_on`
 
-### `count`
+Use the depends_on meta-argument to handle hidden resource or module dependencies that
+Terraform cannot automatically infer. The value is a list of references to other resources
+or child modules, e.g.: `depends_on = [provider_some_resource_type.name]`.
 
-TODO
+### [count](https://developer.hashicorp.com/terraform/language/meta-arguments/count)
 
-Count paramerters can create issues when indexing over lists if the underlying
-list is modified. It is preferable to use maps/ sets and a for_each iterator where
-possible.
+A way to create several similar objects (like a fixed pool of compute instances) without
+writing a separate block for each one. Use a `count = `<integer>` to specify the
+number of created resources / modules.
 
-### `for_each`
+When `count` is used, a `count` object is available for you to modify the
+configuration for each instance. It has one attribute `count.index`, the
+instance integer number.
+
+If your instances are almost identical, `count` is appropriate. If some of their arguments
+need distinct values that can't be directly derived from an integer, it's safer to
+use `for_each`.
+
+### [for_each](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
 
 Iterate over a map or set of strings.
 
@@ -272,6 +306,19 @@ resource "aws_iam_user" "the-accounts" {
   name     = each.key
 }
 ```
+
+### [lifecycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
+
+The lifecycle nested block has several arguments that define how the
+configuration is modified. The keys are:
+- `create_before_destroy (`bool`, default `false`): Create new resources before
+  destroying ones that cannot be modified in place.
+- `prevent_destroy` (`bool`, default `false): Terraform to reject with an error
+  any plan that would destroy the infrastructure object.
+- `ignore_changes (`list` of objects): Specify resource attributes that Terraform
+  should ignore when planning updates to the associated remote object.
+- `replace_triggered_by (`list` of objects): Replace the resource when any of
+  the referenced items change.
 
 ## Splat expression
 
