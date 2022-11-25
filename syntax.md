@@ -84,7 +84,16 @@ TODO
 
 ### [Arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
 
-TODO
+Equality:
+- `==`: equality
+- `!=`: not equal to
+
+Logical:
+- `a||b`: or operator
+- `a&&b`: and operator
+- `!a`: negative
+
+All arithmetic ones are standard.
 
 ### [Splat](https://developer.hashicorp.com/terraform/language/expressions/splat)
 
