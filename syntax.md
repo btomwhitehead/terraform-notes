@@ -121,7 +121,7 @@ boolean value.
 - `list(...)`: a sequence of values identified by consecutive whole numbers
   starting with zero.
 - Type constructor: `list(<TYPE>)`
-- Type constuctor example: `list(string)`
+- Type constructor example: `list(string)`
 
 A list can only be converted to a tuple if it has exactly the required number of elements.
 
@@ -130,7 +130,7 @@ A list can only be converted to a tuple if it has exactly the required number of
 - `set(...)`: a collection of unique values that do not have any secondary
   identifiers or ordering.
 - Type constructor: `set(<TYPE>)`
-- Type constuctor example: `set(string)`
+- Type constructor example: `set(string)`
 
 ```
 {"foo", "bar"}
@@ -165,7 +165,7 @@ toset(["foo", "bar", 1, "foo"])
 - `tuple(...)`: a sequence of elements identified by consecutive whole numbers
   starting with zero, where each element has its own type.
 - Type constructor: `tuple([<TYPE>, ...])`
-- Type constuctor example: `tuple([string, string, bool])`
+- Type constructor example: `tuple([string, string, bool])`
 
 #### `object`
 
