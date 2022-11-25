@@ -4,10 +4,8 @@
 
 1. [cli](./cli.md)
 2. [syntax](./syntax.md)
-3. [variables](./variables.md)
 4. [data sources](./data_sources.md)
 5. [resources](./resources.md)
-6. [outputs](./outputs.md)
 7. [modules](./modules.md)
 
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/

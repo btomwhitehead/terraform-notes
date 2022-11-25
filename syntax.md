@@ -1,16 +1,84 @@
 # Syntax
 
+## Configuration syntax
+
+### Arguments
+
+### Blocks
+
+### Identifiers
+
+### Comments
+
+Use `#` for single line by default. Terraform will also accept
+`//` for single lines, `/*` and `*/` for multi-line.
+
 ## Variables
 
-### defs
-### data types
+Variables are comprised of three types:
+
+- input variables: parameters for a Terraform module
+- output values: return values for a terraform module
+- local values: a feature to assign a short name to an expression
+
+### [Input variables](https://developer.hashicorp.com/terraform/language/values/variables)
+
+Input variables let you customize aspects of Terraform modules without altering the
+module's own source code. This functionality allows you to share modules across
+different Terraform configurations, making your module composable and reusable.
+
+Typical example:
+```
+variable "some_variable_name" {
+  type        = <data type>
+  description = <some readeable description>
+  default     = <some sane default>
+}
+```
+
+There are other additional fields: `validation`, sensitive`, `nullable`.
+
+## [Output values](https://developer.hashicorp.com/terraform/language/values/outputs)
+
+Output values make information about your infrastructure available on the command
+line, and can expose information for other Terraform configurations to use.
+Two common usecases are returning information from a child module to a parent
+module or outputting information from a root module to the CLI.
+
+Typical example:
+```
+output "some_name" {
+  value       = <some resource expression>
+  description = <some readable description>
+}
+```
+
+There are two additional fields: `sensitive` and `depends_on`.
+
+## [Local values](https://developer.hashicorp.com/terraform/language/values/locals)
+
+A local value assigns a name to an expression, so you can use the name multiple
+times within a module instead of repeating the expression.
+
+Typical example:
+```
+locals {
+  service_name = "forum"
+  owner        = "Community Team"
+}
+```
+
+Use local values to centralise a definition of a single value or result that is used in
+many places and that value is likely to be changed in future.
+
+## Data types
 ### maps
 ### lists
 
 Store multiple items as a single variable in a sequential order. Lists are
 indexed.
 
-## sets
+### sets
 
 Sets are used to store multiple items as a single variable. Sets are unordered
 and each element must be unique. Types also need to be the same, so mixed type
@@ -164,7 +232,4 @@ resource "aws_security_group" "dynamicsg" {
   }
 }
 ```
-## Comments
 
-Use `#` for single line by default. Terraform will also accept
-`//` for single lines, `/*` and `*/` for multi-line.
