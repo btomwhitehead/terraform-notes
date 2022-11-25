@@ -78,6 +78,10 @@ The two result values may be of any type, but they must both be of the same type
 
 TODO
 
+### [arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
+
+TODO
+
 ### [Splat](https://developer.hashicorp.com/terraform/language/expressions/splat)
 
 A splat expression provides a more concise way to express a common operation that

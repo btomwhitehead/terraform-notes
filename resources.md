@@ -1,6 +1,12 @@
 # Resources
 
-TODO: Main intro
+## [Resource blocks](https://developer.hashicorp.com/terraform/language/resources/syntax)
+
+TODO
+
+## [Resource behaviour](https://developer.hashicorp.com/terraform/language/resources/behavior)
+
+TODO
 
 ## Meta-arguments
 
@@ -92,3 +98,7 @@ configuration is modified. The keys are:
   should ignore when planning updates to the associated remote object.
 - `replace_triggered_by (`list` of objects): Replace the resource when any of
   the referenced items change.
+
+## [Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
+
+TODO

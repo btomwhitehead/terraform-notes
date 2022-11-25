@@ -132,7 +132,7 @@ Plan, destroy and apply commands will refresh state before doing anything else.
 ### States
 
 - Desired state: the state that the code implies
-- Current state: the actual deployed state  as per the state file
+- Current state: the actual deployed state as per the state file
 - Plan: State changes required to get from current state to desired state
 
 ### Weird behaviours
