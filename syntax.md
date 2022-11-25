@@ -94,7 +94,7 @@ locals {
 Use local values to centralise a definition of a single value or result that is used in
 many places and that value is likely to be changed in future.
 
-## Data types
+## [Data types](https://developer.hashicorp.com/terraform/language/values/variables#type-constraints)
 
 ### Type keywords
 
@@ -192,12 +192,7 @@ object({
 A map (or a larger object) can be converted to an object if it has at least the keys
 required by the object schema. Any additional attributes are discarded during conversion.
 
-## Conditional expressions
-
-## Terraform functions
-
-See [functions overview](https://developer.hashicorp.com/terraform/language/functions)
-for a list of all functions.
+## [functions](https://developer.hashicorp.com/terraform/language/functions)
 
 The Terraform language has a number of built-in functions that can be used in expressions to
 transform and combine values. These are similar to the operators but all follow a common syntax:
@@ -220,18 +215,19 @@ is equivalent to:
 min(55, 2453, 2)
 ```
 
-### zipmap function
+## [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
-Construct a map from a list of keys and list of values:
-`zipmap(keyslist, valueslist)`.
+Syntax is of the form:
+```
+condition ? true_val : false_val
+```
+If condition is `true` then the result is `true_val`. If condition is `false` then the
+result is `false_val`.
 
-```
-> zipmap(["a", "b"], [1, 2])
-{
-  "a" = 1
-  "b" = 2
-}
-```
+The condition can be any expression that resolves to a boolean value. This will usually
+be an expression that uses the equality, comparison, or logical operators.
+
+The two result values may be of any type, but they must both be of the same type.
 
 ## Meta-arguments
 
