@@ -95,19 +95,43 @@ Use local values to centralise a definition of a single value or result that is 
 many places and that value is likely to be changed in future.
 
 ## Data types
-### maps
-### lists
 
-Store multiple items as a single variable in a sequential order. Lists are
-indexed.
+### Type keywords
 
-### sets
+There are three type keywords:
 
-Sets are used to store multiple items as a single variable. Sets are unordered
-and each element must be unique. Types also need to be the same, so mixed type
-elements will be cast to the most general type .
+- `string`: string values, e.g. `"foo"`
+- `number`: numeric values, e.g. `1.2`
+- `bool`: Booleans, e.g. `true` or `false`
+- `any`: A placeholder
 
-Defining a set with curly brackets:
+The keyword any is a special construct that serves as a placeholder for a type yet to be decided.
+`any` is not itself a type: when interpreting a value against a type constraint containing `any`,
+Terraform will attempt to find a single actual type that could replace the any keyword to produce
+a valid result.
+
+The Terraform language will automatically convert number and bool values to string values when
+needed, and vice-versa as long as the string contains a valid representation of a number or
+boolean value.
+
+### Type constructors
+
+#### `list`
+
+- `list(...)`: a sequence of values identified by consecutive whole numbers
+  starting with zero.
+- Type constructor: `list(<TYPE>)`
+- Type constuctor example: `list(string)`
+
+A list can only be converted to a tuple if it has exactly the required number of elements.
+
+#### `set`
+
+- `set(...)`: a collection of unique values that do not have any secondary
+  identifiers or ordering.
+- Type constructor: `set(<TYPE>)`
+- Type constuctor example: `set(string)`
+
 ```
 {"foo", "bar"}
 [
@@ -115,13 +139,14 @@ Defining a set with curly brackets:
   "foo",
 ]
 ```
+When a list or tuple is converted to a set, duplicate values are discarded and the ordering of
+elements is lost. When a set is converted to a list or tuple, the elements will be in an arbitrary
+order.
 
 The [toset](https://developer.hashicorp.com/terraform/language/functions/toset)
-function casts a list of elements to a set.
-
-Casting a list of mixed types to set:
+function casts a list of elements to a set. Note that `toset()` will purge duplicates.
 ```
-toset(["foo", "bar", 1])
+toset(["foo", "bar", 1, "foo"])
 [
   "bar",
   "foo",
@@ -129,18 +154,45 @@ toset(["foo", "bar", 1])
 ]
 ```
 
-Note that `toset()` will purge duplicates:
+#### `map`
+
+- `map(...)`: a collection of values where each is identified by a string label.
+- Type constructor: `map(<TYPE>)`
+- Type constructor example: `map(string)`
+
+#### `tuple`
+
+- `tuple(...)`: a sequence of elements identified by consecutive whole numbers
+  starting with zero, where each element has its own type.
+- Type constructor: `tuple([<TYPE>, ...])`
+- Type constuctor example: `tuple([string, string, bool])`
+
+#### `object`
+
+- `object(...)`: a collection of named attributes that each have their own type.
+- Type constructor: `object({<ATTR NAME> = <TYPE>, ... })`
+- Type constructor example: `object({ a=string, b=string })`
+
+Terraform typically returns an error when it does not receive a value for specified
+object attributes. When you mark an attribute as optional, Terraform instead inserts
+a default value for the missing attribute. This allows the receiving module to
+describe an appropriate fallback behavior.
+
+To mark attributes as optional, use the optional modifier in the object type
+constraint:
+
 ```
-toset(["foo", "bar", "foo"])
-[
-  "bar",
-  "foo",
-]
+object({
+  a = string                # a required attribute
+  b = optional(string)      # an optional attribute
+  c = optional(number, 127) # an optional attribute with default value
+})
 ```
+
+A map (or a larger object) can be converted to an object if it has at least the keys
+required by the object schema. Any additional attributes are discarded during conversion.
 
 ## Conditional expressions
-
-## Local values
 
 ## Terraform functions
 
