@@ -196,6 +196,30 @@ required by the object schema. Any additional attributes are discarded during co
 
 ## Terraform functions
 
+See [functions overview](https://developer.hashicorp.com/terraform/language/functions)
+for a list of all functions.
+
+The Terraform language has a number of built-in functions that can be used in expressions to
+transform and combine values. These are similar to the operators but all follow a common syntax:
+
+```
+<FUNCTION NAME>(<ARGUMENT 1>, <ARGUMENT 2>)
+```
+
+Note: There are only built in functions, there is no support for user defined functions!
+
+### Expanding Function Arguments
+
+List / set / tuple function arguments can be expanded using the `...`  syntax,
+e.g.
+```
+min([55, 2453, 2]...)
+```
+is equivalent to:
+```
+min(55, 2453, 2)
+```
+
 ### zipmap function
 
 Construct a map from a list of keys and list of values:
