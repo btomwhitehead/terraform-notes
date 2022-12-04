@@ -80,7 +80,41 @@ The two result values may be of any type, but they must both be of the same type
 
 ### [For](https://developer.hashicorp.com/terraform/language/expressions/for)
 
-TODO
+A for expression creates a complex type value by transforming another complex type value.
+Each element in the input value can correspond to either one or zero values in the result,
+and an arbitrary expression can be used to transform each input element into an output element.
+
+#### Examples
+
+Iterate over lists with if statement:
+```
+[for s in var.list : upper(s) if s != ""]
+```
+
+Iterate over map of strings, concatenating keys and values into a list:
+```
+[for k, v in var.map : "${k}_${v}"]
+```
+
+Filtering maps of objects based on an object's value:
+```
+variable "users" {
+  type = map(object({
+    is_admin = bool
+  }))
+}
+
+locals {
+  admin_users = {
+    for name, user in var.users : name => user
+    if user.is_admin
+  }
+  regular_users = {
+    for name, user in var.users : name => user
+    if !user.is_admin
+  }
+}
+```
 
 ### [Arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
 
