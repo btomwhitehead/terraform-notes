@@ -146,9 +146,10 @@ resource "aws_instance" "this" {
 - `working_dir`: If provided, specifies the working directory where command will
   be executed.
 - `interpreter`: A list of interpreter arguments used to execute the command,
-  e.g. `["/bin/bash", "-c"]`.
+  e.g. `interpreter = ["/bin/bash", "-c"]`.
 - `environment`: Block of key value pairs representing the environment of the
-  executed command. inherits the current process environment. E.g. `{FOO = "bar"}`.
+  executed command. inherits the current process environment. E.g.
+  `environment = {FOO = "bar"}`.
 - `when`: Specifies when Terraform will execute the command. E.g., `when = destroy`.
 
 #### [remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
@@ -214,6 +215,9 @@ resource "aws_instance" "this" {
 }
 ```
 
+The arguments are:
 - `destination`: The destination path to write to on the remote system.
 - `source`: The source file or directory. Specify it either relative to the current working directory or as an absolute path.
 - `content`: The direct content to copy on the destination.
+
+One and only one of `source` and `content` is required.
