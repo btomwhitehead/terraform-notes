@@ -150,7 +150,6 @@ resource "aws_instance" "this" {
 - `environment`: Block of key value pairs representing the environment of the
   executed command. inherits the current process environment. E.g.
   `environment = {FOO = "bar"}`.
-- `when`: Specifies when Terraform will execute the command. E.g., `when = destroy`.
 
 #### [remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
 
@@ -221,3 +220,30 @@ The arguments are:
 - `content`: The direct content to copy on the destination.
 
 One and only one of `source` and `content` is required.
+
+### `when` meta-argument
+
+The `when` meta-argument specifies when Terraform will execute the provisioner.
+
+When `when = destroy`, the provisioner will run when the resource it is defined
+within is destroyed. `Similarly, `when = create` will run immediately after the
+resource is provisioned. The default behaviour is `when = create`.
+
+If a creation-time provisioner fails, the resource is marked as tainted.
+Creation-time provisioners are also only run at creation, not during any
+subsequent updates.
+
+Destroy provisioners are run before the resource is destroyed. If they fail,
+Terraform will error and rerun the provisioners again on the next terraform apply.
+Destroy-time provisioners can only run if they remain in the configuration at the
+time a resource is destroyed.
+
+### `on_failure` meta-argument
+
+The `on_failure` meta-argument tells terraform what to do when a provisioner
+fails. The default mode  is `on_failure = fail` and the apply will fail. The allowed
+values are:
+
+- `continue`: Ignore the error and continue with creation or destruction.
+- `fail`: Raise an error and stop applying (the default behavior). If this is a creation
+  provisioner, taint the resource.
