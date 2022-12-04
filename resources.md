@@ -101,4 +101,119 @@ configuration is modified. The keys are:
 
 ## [Provisioners](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax)
 
-TODO
+You can use provisioners to model specific actions on the local machine or on a
+remote machine in order to prepare servers or other infrastructure objects for service.
+
+Uses:
+- Passing data into VMs and other compute resources
+- Running configuration management software on VMs and other compute resources
+
+**Note: Provisioners should only be used as a last resort. For most common
+situations there are better alternatives. For more information, see the
+sections above.**
+
+### Provisioners
+
+There are many with support for configuration management software, but the main
+two are  `local-exec` and `remote-exec` for normal CLI commands and scripts and
+`file` for copying files and directories.
+
+#### [The `self` object](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax#the-self-object)
+
+Expressions in provisioner blocks cannot refer to their parent resource by name.
+Instead, they can use the special `self` object.
+
+The `self` object represents the provisioner's parent resource, and has all of
+that resource's attributes. For example, use `self.public_ip` to reference an
+aws_instance's public_ip attribute.
+
+#### [local-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/local-exec)
+
+Run some command on the local machine where the terraform apply is being run.
+
+```
+resource "aws_instance" "this" {
+  ...
+
+  provisioner "local-exec" {
+    command = "some command to run on local machine"
+    ...
+  }
+}
+```
+
+- command: The command to execute.
+- `working_dir`: If provided, specifies the working directory where command will
+  be executed.
+- `interpreter`: A list of interpreter arguments used to execute the command,
+  e.g. `["/bin/bash", "-c"]`.
+- `environment`: Block of key value pairs representing the environment of the
+  executed command. inherits the current process environment. E.g. `{FOO = "bar"}`.
+- `when`: Specifies when Terraform will execute the command. E.g., `when = destroy`.
+
+#### [remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
+
+Run some command directly on some remote server.
+
+```
+resource "aws_instance" "this" {
+  ...
+
+  provisioner "remote-exec" {
+
+    connection {
+      host = "host address"
+      type = "{ssh|winrm}"
+
+      ...
+
+    }
+
+    inline = [
+        command_0,
+        command_1,
+        ...
+    ]
+
+    script = "local/path/to/script"
+
+    script = [
+      "local/path/to/script_0",
+      "local/path/to/script_1",
+      ...
+    ]
+
+    ...
+  }
+}
+```
+
+There are many ways to configure the remote connection in the connection block.
+See the
+[connection block](https://developer.hashicorp.com/terraform/language/resources/provisioners/connection)
+documentation for more information.
+
+Commands can be specified with at most one of the following arguments:
+- `inline`: This is a list of command strings.
+- `script`: This is a path (relative or absolute) to a local script that will
+  be copied to the remote resource and then executed.
+- `scripts`: This is a list of paths (relative or absolute) to local scripts
+  that will be copied to the remote resource and then executed.
+
+#### [file](https://developer.hashicorp.com/terraform/language/resources/provisioners/file)
+
+```
+resource "aws_instance" "this" {
+  ...
+
+  provisioner "file" {
+    source      = "local/path/to/file_or_directory/"
+    destination = "/destination/path"
+    ...
+  }
+}
+```
+
+- `destination`: The destination path to write to on the remote system.
+- `source`: The source file or directory. Specify it either relative to the current working directory or as an absolute path.
+- `content`: The direct content to copy on the destination.
