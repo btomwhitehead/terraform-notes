@@ -49,7 +49,39 @@ generate documentation, index modules for the module registry, and more.
 
 ## [Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)
 
-TODO
+The use of modules transform the configuration from a flat strcture to a
+heirachal structure as each module has its own set of resources and
+possibly child modules.
+
+In most cases it is strongly recommended to  keep the module tree flat,
+with only one level of child modules.
+
+This flat structure is called module
+[composition](https://en.wikipedia.org/wiki/Composability), because
+it takes multiple composable building-block modules and assembles
+them together to produce a larger system. Instead of a module embedding
+its dependencies, creating and managing its own copy, the module
+receives its dependencies from the root module, which can therefore
+connect the same modules in different ways to produce different results.
+
+### [Dependency inversion](https://developer.hashicorp.com/terraform/language/modules/develop/composition#dependency-inversion)
+
+A
+[dependency inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle)
+approach improves flexibility for future refactoring. Writing modules
+that take dependencies in the form of identifiers makes the module
+agnostic of how those identifiers are obtained by the parent module:
+they can arise from outputs of other modules, data blocks or variables.
+
+#### Conditional creation of objects
+
+In situations where the same module is used across multiple environments, it's common
+to see that some necessary object already exists in some environments but needs to be
+created in other environments.
+
+Rather than trying to write a module that itself tries to detect whether something
+exists and create it if not, we recommend applying the dependency inversion approach:
+making the module accept the object it needs as an argument, via an input variable.
 
 ## [Terraform registry](https://registry.terraform.io/)
 
