@@ -14,7 +14,7 @@ reusable modules distributed in separate repositories. Terraform tooling is
 built to understand the standard module structure and use that structure to
 generate documentation, index modules for the module registry, and more.
 
-1. Root module. Terraform files must exist in the root directory of the repository.
+1. Root module: Terraform files must exist in the root directory of the repository.
   This should be the primary entrypoint for the module and is expected to be opinionated.
 
 2. `README.md`. The root module and any nested modules should have README files.
