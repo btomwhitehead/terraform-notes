@@ -1,22 +1,6 @@
 # Modules
 
-## Recommended repo structure
-
-In the repo, all modules should exist within a `modules/` directory. All
-projects that use the modules should be in a `projects/` directory.
-
-```
-.
-├── modules
-│   ├── moduleA
-│   └── moduleB
-└── projects
-    ├── project1
-    └── project2
-
-```
-
-## standard module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
+## [Standard module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
 The standard module structure is a file and directory layout we recommend for
 reusable modules distributed in separate repositories. Terraform tooling is
@@ -55,6 +39,10 @@ generate documentation, index modules for the module registry, and more.
   subdirectory at the root of the repository. Each example may have a `README.md`
   to explain the goal and usage of the example. Examples for submodules should
   also be placed in the root `examples/` directory.
+
+## [Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)
+
+TODO
 
 ## [Terraform registry](https://registry.terraform.io/)
 
