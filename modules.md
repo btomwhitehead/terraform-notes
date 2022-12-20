@@ -56,7 +56,7 @@ The use of modules transform the configuration from a flat strcture to a
 heirachal structure as each module has its own set of resources and
 possibly child modules.
 
-In most cases it is strongly recommended to  keep the module tree flat,
+In most cases it is strongly recommended to keep the module tree flat,
 with only one level of child modules.
 
 This flat structure is called module
@@ -116,7 +116,7 @@ Published modules support versioning, automatically generate documentation,
 allow browsing version histories, show examples and READMEs, and more.
 
 - Modules must use [Semantic Versioning](https://semver.org/). Versions need to
-  be set via tags on the version control system.
+  be set via git tags on the version control system.
 - The module must follow the 3 part
   [module naming convention](#module-naming-convention).
 - The module must follow the
