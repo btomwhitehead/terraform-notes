@@ -9,7 +9,7 @@ convention where:
 
 ## [Standard module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
-The standard module structure is a file and directory layout we recommend for
+The standard module structure is the recommended file and directory layout for
 reusable modules distributed in separate repositories. Terraform tooling is
 built to understand the standard module structure and use that structure to
 generate documentation, index modules for the module registry, and more.
@@ -127,9 +127,9 @@ allow browsing version histories, show examples and READMEs, and more.
 
 A utility to generate documentation from Terraform modules in various output formats.
 
-The simplest case creates a `README.md` with tables for equirements,
+The simplest case creates a `README.md` with tables for requirements,
 providers, input variables and output variables:
 
 ```
-terraform-docs markdown table .
+terraform-docs markdown table --output-file README.md .
 ```
