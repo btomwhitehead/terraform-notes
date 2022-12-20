@@ -25,24 +25,27 @@ generate documentation, index modules for the module registry, and more.
     may be where all the resources are created. For a complex module, resource
     creation may be split into multiple files but any nested module calls should
     be in the main file.
-  2. `variables.tf`. Contains all variable declarations. If no variables are
+  2. `variables.tf`: Contains all variable declarations. If no variables are
      defined, this file should still exist and be empty.
-  3. `outputs.tf`. Contains all output variable declarations. If no outputs are
+  3. `outputs.tf`: Contains all output variable declarations. If no outputs are
+     defined, this file should still exist and be empty.
+  4. `versions.tf`: Contains any `terraform {}` block configurations required by
+     the module, such as `required_provider` blocks. If no configurations are
      defined, this file should still exist and be empty.
 
 4. All variables and outputs should have descriptions.
 
-5. `LICENSE`. The license under which this module is available. If you are publishing
+5. `LICENSE`: The license under which this module is available. If you are publishing
   a module publicly, many organizations will not adopt a module unless a clear
   license is present. We recommend always having a license file, even if it is
   not an open source license.
 
-6. Nested modules. Nested modules should exist under the modules/ subdirectory. If
-  the root module includes calls to nested modules, they should use relative paths
-  like `./modules/consul-cluster` so that Terraform will consider them to be part
+6. `modules/`: Nested modules should exist under this subdirectory. If the root
+  module includes calls to nested modules, they should use relative paths
+  like `./modules/module_a` so that Terraform will consider them to be part
   of the same repository or package, rather than downloading them again separately.
 
-7. `examples/`. Examples of using the module should exist under the `examples/`
+7. `examples/`: Examples of using the module should exist under the `examples/`
   subdirectory at the root of the repository. Each example may have a `README.md`
   to explain the goal and usage of the example. Examples for submodules should
   also be placed in the root `examples/` directory.
