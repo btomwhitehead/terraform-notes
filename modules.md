@@ -1,5 +1,12 @@
 # Modules
 
+## Module naming convention
+
+Module repositories must follow the `terraform-<PROVIDER>-<NAME>` 3 part naming
+convention where:
+- `<NAME>`: reflects the type of infrastructure the module manages
+- `<PROVIDER>`: the main provider where it creates that infrastructure e.g. `azurerm`
+
 ## [Standard module structure](https://developer.hashicorp.com/terraform/language/modules/develop/structure)
 
 The standard module structure is a file and directory layout we recommend for
@@ -72,18 +79,10 @@ module "vpc" {
 
 Published modules support versioning, automatically generate documentation,
 allow browsing version histories, show examples and READMEs, and more.
-We recommend publishing reusable modules to a registry.
 
-- GitHub. The module must be on GitHub and must be a public repo. This is only
-  a requirement for the public registry.
-- Named `terraform-<PROVIDER>-<NAME>`. Module repositories must use this three-part
-  name format, where i`<NAME>` reflects the type of infrastructure the module manages
-  and `<PROVIDER>` is the main provider where it creates that infrastructure.
-- Repository description. The GitHub repository description is used to populate the
-  short description of the module.
-- Standard module structure. The module must adhere to the standard module structure.
-  This allows the registry to inspect your module and generate documentation, track
-  resource usage, parse submodules and examples, and more.
-- Semantic versioning. The registry uses tags to identify module versions. Release
-  tag names must be a semantic version. To publish a module initially, at least one
-  release tag must be present.
+- Modules must use [Semantic Versioning](https://semver.org/).
+- The module must follow the 3 part
+  [module naming convention](#module-naming-convention).
+- The module must follow the
+  [standard module structure](#standard-module-structure).
+- Public modules must be on GitHub and the repo must be a public.
