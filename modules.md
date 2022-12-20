@@ -17,11 +17,11 @@ generate documentation, index modules for the module registry, and more.
 1. Root module: Terraform files must exist in the root directory of the repository.
   This should be the primary entrypoint for the module and is expected to be opinionated.
 
-2. `README.md`. The root module and any nested modules should have README files.
+2. `README.md`: The root module and any nested modules should have README files.
   There should be a description of the module and what it should be used for.
 
 3. Expected terraform files:
-  1. `main.tf`. The main entrypoint of the module. For a simple module, this
+  1. `main.tf`: The main entrypoint of the module. For a simple module, this
     may be where all the resources are created. For a complex module, resource
     creation may be split into multiple files but any nested module calls should
     be in the main file.
@@ -122,3 +122,14 @@ allow browsing version histories, show examples and READMEs, and more.
 - The module must follow the
   [standard module structure](#standard-module-structure).
 - Public modules must be on GitHub and the repo must be a public.
+
+## [terraform-docs](https://github.com/terraform-docs/terraform-docs)
+
+A utility to generate documentation from Terraform modules in various output formats.
+
+The simplest case creates a `README.md` with tables for equirements,
+providers, input variables and output variables:
+
+```
+terraform-docs markdown table .
+```
