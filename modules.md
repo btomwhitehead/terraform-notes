@@ -22,7 +22,8 @@ generate documentation, index modules for the module registry, and more.
 
 3. Expected terraform files:
   1. `main.tf`. The main entrypoint of the module. For a simple module, this
-    may be where all the resources are created. For a complex module, resource
+    may be where all the resources are created. Additionally, it should contain
+    any required provider configuration blocks. For a complex module, resource
     creation may be split into multiple files but any nested module calls should
     be in the main file.
   2. `variables.tf`. Contains all variable declarations. If no variables are
@@ -112,7 +113,8 @@ module "vpc" {
 Published modules support versioning, automatically generate documentation,
 allow browsing version histories, show examples and READMEs, and more.
 
-- Modules must use [Semantic Versioning](https://semver.org/).
+- Modules must use [Semantic Versioning](https://semver.org/). Versions need to
+  be set via tags on the version control system.
 - The module must follow the 3 part
   [module naming convention](#module-naming-convention).
 - The module must follow the
