@@ -97,19 +97,6 @@ similar modules.
 Verified modules are reviewed by HashiCorp and have a blue verification badge.
 They are actively maintained to stay up to date with providers.
 
-### Using modules from a registry
-
-Make use of the `source` and `version` parameters as below:
-
-```
-module "vpc" {
-  source  = "terraform-registry/source/path"
-  version = "x.y.z"
-
-  ...
-}
-```
-
 ### Publishing to a registry
 
 Published modules support versioning, automatically generate documentation,
@@ -122,6 +109,89 @@ allow browsing version histories, show examples and READMEs, and more.
 - The module must follow the
   [standard module structure](#standard-module-structure).
 - Public modules must be on GitHub and the repo must be a public.
+
+## [Module sources](https://developer.hashicorp.com/terraform/language/modules/sources#local-paths)
+
+The `source` argument has different specifications for different module sources.
+
+### Local paths
+
+The `source` argument is a relative path:
+```
+module "foo" {
+  source = "./foo"
+
+  ...
+}
+```
+
+### Public terraform registry
+
+The `source` argument is the module name of the form `<NAMESPACE>/<NAME>/<PROVIDER>`:
+```
+module "foo" {
+  source  = "foo/bar/aws"
+  version = "x.y.z"
+
+  ...
+}
+```
+
+### Privately hosted terraform registry
+
+The `source` argument includes a hostname prefix:
+```
+module "foo" {
+  source = "<hostname>/azurerm"
+  version = "1.1.0"
+}
+```
+
+### Github
+
+The `source` argument is either:
+- a github URL, in which case it will clone via HTTPS
+- the girhub SSH address
+
+HTTPS:
+```
+module "foo" {
+  source = "github.com/foo-account/foo"
+}
+```
+
+SSH:
+```
+module "foo" {
+  source = "git@github.com:foo-account/foo.git"
+}
+```
+
+Both of the above will use whatever git credentials exist on the host machine.
+Only SSH can be configured with Terraform Cloud.
+
+### Generic git repository
+
+The `source` argument is either:
+- a github URL, in which case it will clone via HTTPS
+- the girhub SSH address
+
+HTTPS:
+```
+module "foo" {
+  source = "git::https://some-url.com/foo.git"
+}
+```
+
+SSH:
+```
+module "foo" {
+  source = "git::ssh://username@some-url.com/foo.git"
+}
+```
+
+Both of the above will use whatever git credentials exist on the host machine.
+Only SSH can be configured with Terraform Cloud.
 
 ## [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 
