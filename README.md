@@ -6,9 +6,10 @@
 2. [syntax](./syntax.md)
 3. [variables](./variables.md)
 4. [resources](./resources.md)
-5. [data sources](./data_sources.md)
-6. [modules](./modules.md)
-7. [backends](./backends.md)
+5. [provisioners](./provisioners.md)
+6. [data sources](./data_sources.md)
+7. [modules](./modules.md)
+8. [backends](./backends.md)
 
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
 
