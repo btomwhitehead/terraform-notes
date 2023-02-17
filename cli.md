@@ -13,6 +13,7 @@ Main commands:
 
 Other useful commands:
 - `fmt`           Reformat your configuration in the standard style
+- `workspace`     Workspace management
 - `force-unlock`  Release a stuck lock on the current workspace
 - `graph`         Generate a Graphviz graph of the steps in an operation in DOT
                   format
