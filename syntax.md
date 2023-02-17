@@ -62,7 +62,46 @@ min(55, 2453, 2)
 ```
 ### [Strings and templates](https://developer.hashicorp.com/terraform/language/expressions/strings)
 
-TODO
+Terraform supports both a quoted syntax and a "heredoc" syntax for strings.
+
+#### Quoted strings
+
+Quotes strings use backslashes for escape sequences with some common special characters like:
+
+- `\n`: Newline
+- `\r`: Carriage Return
+- `\t`:	Tab
+- `\"`:	Literal quote
+- `\\`:	Literal backslash
+- `$${`: Literal `${`, without beginning an interpolation sequence.
+- `%%{`: Literal `%{`, without beginning a template directive sequence.
+
+#### Heredoc Strings
+
+Terraform supports indented Heredoc strings as well as the usual undindented kind, for example:
+```
+block {
+  value = <<-EOT
+  hello
+    world
+  EOT
+}
+```
+renders the `value` as:
+```
+hello
+  world
+```
+
+Hererdocs also support the last two escape sequences above, `$${`, and `%%{`.
+
+#### String templates
+
+Templates let you directly embed expressions into a string literal, to dynamically construct strings from other values.
+
+A `${ ... }` sequence is an interpolation, which evaluates the expression given between the markers. For example `"Hello, ${var.name}!"` with `var.name = "Tom"` produces `"Hello, Tom!"`.
+
+A `%{ ... }` sequence is a directive, which allows for conditional results and iteration over collections. For example `"Hello, %{ if var.name != "" }${var.name}%{ else }unnamed%{ endif }!"` with `var.name = "Tom"` returns `"Hello, Tom!"` and with `var.name = ""` returns `"Hello, unnnamed!"`.
 
 ### [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
