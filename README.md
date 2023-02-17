@@ -8,6 +8,7 @@
 4. [resources](./resources.md)
 5. [data sources](./data_sources.md)
 6. [modules](./modules.md)
+7. [backends](./backends.md)
 
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
 
