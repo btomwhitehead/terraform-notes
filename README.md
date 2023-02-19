@@ -10,6 +10,7 @@
 6. [data sources](./data_sources.md)
 7. [modules](./modules.md)
 8. [backends](./backends.md)
+9. [terraform cloud](./terraform_cloud.md)
 
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
 
