@@ -18,10 +18,13 @@ variable "some_variable_name" {
   type        = <data type>
   description = <some readeable description>
   default     = <some sane default>
+
+  # Additional fields
+  validation = <some HCL validation rule, in addition to type constraint>
+  sensitive  = <Redact this field in all terraform console / cloud output>
+  nullable   = <Sepecify if the variable can be set to null, defaults to true>
 }
 ```
-
-There are other additional fields: `validation`, sensitive`, `nullable`.
 
 ## [Output values](https://developer.hashicorp.com/terraform/language/values/outputs)
 
@@ -35,10 +38,12 @@ Typical example:
 output "some_name" {
   value       = <some resource expression>
   description = <some readable description>
+
+  # Additional fields
+  sensitive  = <Redact this field in all terraform console / cloud output>
+  depends_on = <Resource ID that must be created before this resource, only use as a last resort when dependencies cannot be inferred>
 }
 ```
-
-There are two additional fields: `sensitive` and `depends_on`.
 
 ## [Local values](https://developer.hashicorp.com/terraform/language/values/locals)
 

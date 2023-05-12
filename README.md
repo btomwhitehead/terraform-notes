@@ -11,6 +11,7 @@
 7. [modules](./modules.md)
 8. [State and backends](./state_and_backends.md)
 9. [terraform cloud](./terraform_cloud.md)
+10. [hashicorp vault](./hashicorp_vault.md)
 
 Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
 
@@ -45,3 +46,9 @@ large infrastructure. The following tips can help reduce the total API calls:
 - Bypass the refresh step of plan / apply with `-refresh=false` flag.
 - Specify specific targets that you want to modify, that are resources, resource
   instances or modules using the `-target=resouce` flag.
+
+## Hanlding provider credentials correctly
+
+- Don't put them in code
+- Use variables when required
+- Read the provider documentation for the recommended method

@@ -223,3 +223,7 @@ resource "aws_instance" "bar" {
 5. Apply the configuration to update your Terraform state.
 
 See [tutorial](https://developer.hashicorp.com/terraform/tutorials/state/state-import) for an example of the workflow.
+
+# Dependency lock file
+
+TODO
