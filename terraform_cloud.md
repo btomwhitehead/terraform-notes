@@ -22,7 +22,7 @@
 
 - Self hosted cloud agents
 - Cost estimation: Display costs during plan stage
-- Access control and governance: using team assignments and team based permissions 
+- Access control and governance: using team assignments and team based permissions
 - Policy control: Define and enforce policy-as-code using Sentinel or OPA frameworks
   to ensure resources are provisioned according to your governance principles (such as limiting VM sizes)
 
@@ -34,6 +34,7 @@ TODO
 ### [Workspaces](https://developer.hashicorp.com/terraform/cloud-docs/workspaces)
 
 A workspace contains:
+
 - A series of timestamped state versions
 - A history of run history, including summaries, logs, etc.
 - variables:
@@ -54,10 +55,13 @@ TODO
 
 ## [Terraform enterprise](https://developer.hashicorp.com/terraform/enterprise)
 
-- Terraform Enterprise is a self-hosted distribution of Terraform Cloud with no resource limits and with additional enterprise-grade architectural features like audit logging and SAML single sign-on. 
+- Terraform Enterprise is a self-hosted distribution of Terraform Cloud with no resource limits and with additional
+  enterprise-grade architectural features like audit logging and SAML single sign-on.
 - It can be installed and used on a fully air-gapped network if required.
 
 ## Debugging tips
 
 - Note how the CLI doesnt show whats hapening on the tf agent
 - set an environment type variable on the variables page of a workspace: `TF_LOG`...
+
+See [terraform debugging guide](https://developer.hashicorp.com/terraform/internals/debugging).
