@@ -12,6 +12,7 @@
 8. [State and backends](./state_and_backends.md)
 9. [terraform cloud](./terraform_cloud.md)
 10. [hashicorp vault](./hashicorp_vault.md)
+11. [providers](./providers.md)
 
 Notes for terrafrorm associate course notes: <https://www.udemy.com/course/terraform-beginner-to-advanced/>
 
