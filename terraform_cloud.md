@@ -22,11 +22,6 @@
 - Policy control: Define and enforce policy-as-code using Sentinel or OPA frameworks to ensure resources are
   provisioned according to your governance principles (such as limiting VM sizes).
 
-### [Projects](https://developer.hashicorp.com/terraform/tutorials/cloud/projects)
-
-- Group workspaces into projects
-TODO
-
 ### [Workspaces](https://developer.hashicorp.com/terraform/cloud-docs/workspaces)
 
 A workspace contains:
@@ -42,6 +37,12 @@ A workspace contains:
   - Version control: integrate with a repository and pull requests
   - CLI-driven: Remote runs triggered from CLI
   - API-driven: Integetrate with the terraform API
+
+### [Projects](https://developer.hashicorp.com/terraform/tutorials/cloud/projects)
+
+Terraform Cloud projects exist to organise workspaces according to an organisation's resource usage and ownership patterns
+such teams, business units, or services. Projects additionally assist to manage workspace permissions as group access
+can be granted directly to a project.
 
 ### [Private registry](https://developer.hashicorp.com/terraform/registry/private)
 
