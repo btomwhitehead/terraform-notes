@@ -239,4 +239,17 @@ See [tutorial](https://developer.hashicorp.com/terraform/tutorials/state/state-i
 
 ## Dependency lock file
 
-TODO
+Terraform configurations may have external dependencies in the form of providers and modules. Version constraints
+within the configuration itself determine which versions of dependencies are potentially compatible, but after
+selecting a specific version of each dependency Terraform stores this decision in a dependency lock file so that results
+are repeatable in the future. Only provider versions are stored in this file and modules will always be set to the
+latest available version subject to its version constraints.
+
+A dependency lock file is created by running `terraform init` and is stored as `.terraform.lock.hcl` in the root of the script.
+
+If a particular provider has no existing recorded selection, Terraform will select the newest available version that matches the given
+version constraint, and then update the lock file to include that selection. If a particular provider already has a selection recorded
+in the lock file, Terraform will always re-select that version for installation, even if a newer version has become available. You can
+override that behavior with `terraform init -upgrade`, in which case Terraform will disregard the existing selections.
+
+For further information see the [Dependency lock file docs](https://developer.hashicorp.com/terraform/language/files/dependency-lock).
