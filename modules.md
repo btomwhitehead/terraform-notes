@@ -87,18 +87,7 @@ Rather than trying to write a module that itself tries to detect whether somethi
 exists and create it if not, we recommend applying the dependency inversion approach:
 making the module accept the object it needs as an argument, via an input variable.
 
-## [Terraform registry](https://registry.terraform.io/)
-
-Terraform registry is a repository of terraform providers and modules
-contributed by the community.
-
-These modules can be used as is or can guide you on how to create your own
-similar modules.
-
-Verified modules are reviewed by HashiCorp and have a blue verification badge.
-They are actively maintained to stay up to date with providers.
-
-### Publishing to a registry
+## Publishing to a registry
 
 Published modules support versioning, automatically generate documentation,
 allow browsing version histories, show examples and READMEs, and more.

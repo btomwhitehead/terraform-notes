@@ -46,9 +46,11 @@ can be granted directly to a project.
 
 ### [Private registry](https://developer.hashicorp.com/terraform/registry/private)
 
-TODO
+Terraform Cloud has a private registry capability so that custom providers and modules can be securely and easily shared
+across a company. Providers or modules can be imported from ADO/Github/Gitlab and support versioning, unlike loading a module
+directly from a version control source where it uses the lastest commit from a branch.
 
-## Configuration
+## CLI configuration
 
 Terraform Cloud can be configured for CLI usage with `cloud {}` block in the `terraform {}` block such as:
 
@@ -65,8 +67,6 @@ terraform {
 
   ...
 ```
-
-## Policy-as-code and Hashicorp Sentinel
 
 ## [Terraform enterprise](https://developer.hashicorp.com/terraform/enterprise)
 
