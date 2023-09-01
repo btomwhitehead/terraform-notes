@@ -5,14 +5,16 @@
 ### Arguments
 
 An argument assigns an argument value to a particular argument name:
-```
+
+```terraform
 image_id = "abc123"
 ```
 
 ### Blocks
 
 A block is a container for other content:
-```
+
+```terraform
 block_type "label_1" ... "label_n" {
   argument_name_1 = argument_value_1
 
@@ -21,6 +23,7 @@ block_type "label_1" ... "label_n" {
   }
 }
 ```
+
 - A block has a type specified as the first keyword.
 - Each block type defines how many labels must follow the type keyword.
 - The block body is delimited by the { and } characters. Within the block body,
@@ -43,7 +46,7 @@ Use `#` for single line by default. Terraform will also accept
 The Terraform language has a number of built-in functions that can be used in expressions to
 transform and combine values. These are similar to the operators but all follow a common syntax:
 
-```
+```terraform
 <FUNCTION NAME>(<ARGUMENT 1>, <ARGUMENT 2>)
 ```
 
@@ -53,13 +56,17 @@ Note: There are only built in functions, there is no support for user defined fu
 
 List / set / tuple function arguments can be expanded using the `...` syntax,
 e.g.
-```
+
+```terraform
 min([55, 2453, 2]...)
 ```
+
 is equivalent to:
-```
+
+```terraform
 min(55, 2453, 2)
 ```
+
 ### [Strings and templates](https://developer.hashicorp.com/terraform/language/expressions/strings)
 
 Terraform supports both a quoted syntax and a "heredoc" syntax for strings.
@@ -70,16 +77,17 @@ Quotes strings use backslashes for escape sequences with some common special cha
 
 - `\n`: Newline
 - `\r`: Carriage Return
-- `\t`:	Tab
-- `\"`:	Literal quote
-- `\\`:	Literal backslash
+- `\t`: Tab
+- `\"`: Literal quote
+- `\\`: Literal backslash
 - `$${`: Literal `${`, without beginning an interpolation sequence.
 - `%%{`: Literal `%{`, without beginning a template directive sequence.
 
 #### Heredoc Strings
 
 Terraform supports indented Heredoc strings as well as the usual undindented kind, for example:
-```
+
+```terraform
 block {
   value = <<-EOT
   hello
@@ -87,8 +95,10 @@ block {
   EOT
 }
 ```
+
 renders the `value` as:
-```
+
+```terraform
 hello
   world
 ```
@@ -106,9 +116,11 @@ A `%{ ... }` sequence is a directive, which allows for conditional results and i
 ### [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
 Syntax is of the form:
-```
+
+```terraform
 condition ? true_val : false_val
 ```
+
 If condition is `true` then the result is `true_val`. If condition is `false` then the
 result is `false_val`.
 
@@ -126,17 +138,20 @@ and an arbitrary expression can be used to transform each input element into an 
 #### Examples
 
 Iterate over lists with if statement:
-```
+
+```terraform
 [for s in var.list : upper(s) if s != ""]
 ```
 
 Iterate over map of strings, concatenating keys and values into a list:
-```
+
+```terraform
 [for k, v in var.map : "${k}_${v}"]
 ```
 
 Filtering maps of objects based on an object's value:
-```
+
+```terraform
 variable "users" {
   type = map(object({
     is_admin = bool
@@ -158,10 +173,12 @@ locals {
 ### [Arithmetic and logical operators](https://developer.hashicorp.com/terraform/language/expressions/operators)
 
 Equality:
+
 - `==`: equality
 - `!=`: not equal to
 
 Logical:
+
 - `a||b`: or operator
 - `a&&b`: and operator
 - `!a`: negative
@@ -175,11 +192,14 @@ could otherwise be performed with a for expression.
 
 If var.list is a list of objects that all have an attribute id, then a list of
 the ids could be produced with the following for expression:
-```
+
+```terraform
 [for o in var.list : o.id]
 ```
+
 This is equivalent to the following splat expression:
-```
+
+```terraform
 var.list[*].id
 ```
 
@@ -190,7 +210,7 @@ Dynamically construct repeateable nested blocks using an iterator over a list or
 If `iterator` is not specified, it will default to the name of the dynamic block
 being created.
 
-```
+```terraform
 variable "sg_groups" {
   type = list(nunmber)
   default = [8200, 8201, 8203]

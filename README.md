@@ -13,7 +13,7 @@
 9. [terraform cloud](./terraform_cloud.md)
 10. [hashicorp vault](./hashicorp_vault.md)
 
-Notes for terrafrorm associate course notes: https://www.udemy.com/course/terraform-beginner-to-advanced/
+Notes for terrafrorm associate course notes: <https://www.udemy.com/course/terraform-beginner-to-advanced/>
 
 TODO: update
 

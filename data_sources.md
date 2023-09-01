@@ -8,7 +8,7 @@ Note, data blocks are executed before resource blocks and so they cannot be used
 
 A data source is accessed via a data block:
 
-```
+```terraform
 data "azurerm_resource_group" "this" {
   name = "some_resource_group_name"
 }
@@ -31,7 +31,8 @@ Two common cases are `local_file` and `template_file` data sources.
 The `local_file` data source reads a file from the local filesystem.
 
 In the following example a file is read from disk and is uploaded to a key vault:
-```
+
+```terraform
 data "local_file" "foo" {
   filename = "${path.module}/foo.bar"
 }
@@ -42,15 +43,16 @@ resource "azurerm_key_vault_secret" "foo" {
   key_vault_id = azurerm_key_vault.example.id
 }
 ```
-Arguments:
-- `filename`: Path to the file that will be read.
 
+Arguments:
+
+- `filename`: Path to the file that will be read.
 
 ### [template_file](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file)
 
 The `template_file` data source renders a template from a template string, which is usually loaded from an external file.
 
-```
+```terraform
 data "template_file" "this" {
   template = "${file(foo.bar)}"
   vars = {
@@ -60,9 +62,9 @@ data "template_file" "this" {
 ```
 
 Arguments:
+
 - `template`: The contents of the template, as a string using [Terraform template syntax](https://developer.hashicorp.com/terraform/language/expressions#string-templates). It is common practice to use the `file()` function to load the template source from a file.
 - `vars`: Optional variables for interpolation within the template. Values must all be primitives datatypes such as `string` and `number`.
-
 
 ## Meta-arguments
 

@@ -13,7 +13,8 @@ module's own source code. This functionality allows you to share modules across
 different Terraform configurations, making your module composable and reusable.
 
 Typical example:
-```
+
+```terraform
 variable "some_variable_name" {
   type        = <data type>
   description = <some readeable description>
@@ -34,7 +35,8 @@ Two common usecases are returning information from a child module to a parent
 module or outputting information from a root module to the CLI.
 
 Typical example:
-```
+
+```terraform
 output "some_name" {
   value       = <some resource expression>
   description = <some readable description>
@@ -51,7 +53,8 @@ A local value assigns a name to an expression, so you can use the name multiple
 times within a module instead of repeating the expression.
 
 Typical example:
-```
+
+```terraform
 locals {
   service_name = "forum"
   owner        = "Community Team"
@@ -99,20 +102,22 @@ A list can only be converted to a tuple if it has exactly the required number of
 - Type constructor: `set(<TYPE>)`
 - Type constructor example: `set(string)`
 
-```
+```terraform
 {"foo", "bar"}
 [
   "bar",
   "foo",
 ]
 ```
+
 When a list or tuple is converted to a set, duplicate values are discarded and the ordering of
 elements is lost. When a set is converted to a list or tuple, the elements will be in an arbitrary
 order.
 
 The [toset](https://developer.hashicorp.com/terraform/language/functions/toset)
 function casts a list of elements to a set. Note that `toset()` will purge duplicates.
-```
+
+```terraform
 toset(["foo", "bar", 1, "foo"])
 [
   "bar",
@@ -148,7 +153,7 @@ describe an appropriate fallback behavior.
 To mark attributes as optional, use the optional modifier in the object type
 constraint:
 
-```
+```terraform
 object({
   a = string                # a required attribute
   b = optional(string)      # an optional attribute

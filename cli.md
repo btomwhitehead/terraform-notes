@@ -1,10 +1,13 @@
 # [CLI commands](https://developer.hashicorp.com/terraform/cli/commands)
 
-```
+## `terraform` CLI
+
+```bash
 terraform [global options] <subcommand> [args]
 ```
 
 Main commands:
+
 - `init`          Prepare your working directory for other commands
 - `validate`      Check whether the configuration is valid
 - `plan`          Show changes required by the current configuration
@@ -12,6 +15,7 @@ Main commands:
 - `destroy`       Destroy previously-created infrastructure
 
 Other useful commands:
+
 - `fmt`           Reformat your configuration in the standard style
 - `workspace`     Workspace management
 - `force-unlock`  Release a stuck lock on the current workspace
@@ -19,7 +23,7 @@ Other useful commands:
                   format
 - `refresh`       Update the state to match remote systems
 
-### terraform `plan` and `apply
+## terraform `plan` and `apply` CLI
 
 The following options customize how Terraform will produce its plan. You
 can also use these options when you run "terraform apply" without passing

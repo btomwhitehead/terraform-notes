@@ -10,17 +10,19 @@ This is required to understand what resources may need to be modified once an up
 
 Additionally, terraform caches resource attribute values in the state file to improve performance. This is most important when using large configurations as querying every resource's attributes is time consuming.
 
-State files are stored in a [backend](#-backends) in `json` format.
+State files are stored in a [backend](#backends) in `json` format.
 
 ## State inspection and modification
 
 Command:
-```
+
+```sh
 terraform state
 ```
 
 Subcommands:
-```
+
+```sh
 Subcommands:
     list                List resources in the state
     mv                  Move an item in the state
@@ -34,32 +36,38 @@ Subcommands:
 ### Some examples
 
 List all resources in a specific module defined in the root of the script:
-```
+
+```sh
 terraform state list module.some_module_name
 ```
 
 Show info about a specific resource:
-```
+
+```sh
 terraform state show module.some_module_name.provider_resource_name.instance_name
 ```
 
 Move item in a state without destroying and recreating it, in this case a module:
-```
+
+```sh
 terraform state mv module.some_module_name module.some_other_module_name
 ```
 
 Manually download and output the state from some remote backend in `json`:
-```
+
+```sh
 terraform state pull
 ```
 
 Delete an item from a terraform state, so that it is no longer managed by terraform:
-```
+
+```sh
 terraform state rm provider_resource_name.instance_name
 ```
 
 Replace AWS provider with a public fork that has some desired additional features:
-```
+
+```sh
 terraform state replace-provider hashicorp/aws registry.acme.corp/acme/aws
 ```
 
@@ -69,7 +77,7 @@ Backends determine where terraform stores its state as well as managing write ac
 
 Backend blocks are defined by:
 
-```
+```terraform
 terraform {
   backend "backend_type" {
     ...
@@ -108,7 +116,7 @@ The default backend is local, where state is stored locally in the project
 directory in a file named `terraform.tfstate` by default. The workspace dir can
 also be set if needed.
 
-```
+```terraform
 terraform {
   backend "local" {
     path = "relative/path/to/terraform.tfstate"
@@ -133,7 +141,8 @@ As of Terraform v1.1.0 and Terraform Enterprise v202201-1, it is recommended to 
 Store the state as a given key in a given bucket on Amazon S3.
 
 Configuration:
-```
+
+```terraform
 terraform {
   backend "s3" {
     bucket          = "mybucket"
@@ -155,7 +164,8 @@ Additional [DynamoDB permissions](https://developer.hashicorp.com/terraform/lang
 Stores the state as a Blob with the given Key within the Blob Container within the Blob Storage Account. This backend supports state locking with built in blob storage lease capabilities.
 
 Configuration wth service principal:
-```
+
+```terraform
 terraform {
   backend "azurerm" {
     resource_group_name  = "some_resource_group_name"
@@ -174,16 +184,17 @@ uses the latest state snapshot from a specified state backend to retrieve the ro
 
 For example, query another state using:
 
-```
+```terraform
 data "terraform_remote_state" "foo" {
   backend = "s3"
 
   ...
 }
 ```
+
 And use the root level outputs in other definitions:
 
-```
+```terraform
 resource "aws_instance" "bar" {
   # ...
   subnet_id = data.terraform_remote_state.foo.outputs.subnet_id
@@ -196,7 +207,8 @@ The same can be done (as well as other features) using [tfe provider](https://re
 [`tfe_outputs` data source](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/outputs).
 
 For example, query another state using:
-```
+
+```terraform
 data "tfe_outputs" "foo" {
   organization = "my-org"
   workspace = "my-workspace"
@@ -204,7 +216,8 @@ data "tfe_outputs" "foo" {
 ```
 
 The relevant root level outputs can be used in new definitions:
-```
+
+```terraform
 resource "aws_instance" "bar" {
   subnet_id = data.tfe_outputs.foo.outputs.subnet_id
 }
@@ -224,6 +237,6 @@ resource "aws_instance" "bar" {
 
 See [tutorial](https://developer.hashicorp.com/terraform/tutorials/state/state-import) for an example of the workflow.
 
-# Dependency lock file
+## Dependency lock file
 
 TODO

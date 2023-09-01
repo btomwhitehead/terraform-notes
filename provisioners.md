@@ -4,6 +4,7 @@ You can use provisioners to model specific actions on the local machine or on a
 remote machine in order to prepare servers or other infrastructure objects for service.
 
 Uses:
+
 - Passing data into VMs and other compute resources
 - Running configuration management software on VMs and other compute resources
 
@@ -30,7 +31,7 @@ aws_instance's public_ip attribute.
 
 Run some command on the local machine where the terraform apply is being run.
 
-```
+```terraform
 resource "aws_instance" "this" {
   ...
 
@@ -54,7 +55,7 @@ resource "aws_instance" "this" {
 
 Run some command directly on some remote server.
 
-```
+```terraform
 resource "aws_instance" "this" {
   ...
 
@@ -93,6 +94,7 @@ See the
 documentation for more information.
 
 Commands can be specified with at most one of the following arguments:
+
 - `inline`: This is a list of command strings.
 - `script`: This is a path (relative or absolute) to a local script that will
   be copied to the remote resource and then executed.
@@ -101,7 +103,7 @@ Commands can be specified with at most one of the following arguments:
 
 ### [file](https://developer.hashicorp.com/terraform/language/resources/provisioners/file)
 
-```
+```terraform
 resource "aws_instance" "this" {
   ...
 
@@ -114,6 +116,7 @@ resource "aws_instance" "this" {
 ```
 
 The arguments are:
+
 - `destination`: The destination path to write to on the remote system.
 - `source`: The source file or directory. Specify it either relative to the current working directory or as an absolute path.
 - `content`: The direct content to copy on the destination.
@@ -125,7 +128,7 @@ One and only one of `source` and `content` is required.
 The `when` meta-argument specifies when Terraform will execute the provisioner.
 
 When `when = destroy`, the provisioner will run when the resource it is defined
-within is destroyed. `Similarly, `when = create` will run immediately after the
+within is destroyed. `Similarly,`when = create` will run immediately after the
 resource is provisioned. The default behaviour is `when = create`.
 
 If a creation-time provisioner fails, the resource is marked as tainted.

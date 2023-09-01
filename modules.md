@@ -4,6 +4,7 @@
 
 Module repositories must follow the `terraform-<PROVIDER>-<NAME>` 3 part naming
 convention where:
+
 - `<NAME>`: reflects the type of infrastructure the module manages
 - `<PROVIDER>`: the main provider where it creates that infrastructure e.g. `azurerm`
 
@@ -21,34 +22,34 @@ generate documentation, index modules for the module registry, and more.
   There should be a description of the module and what it should be used for.
 
 3. Expected terraform files:
-  1. `main.tf`: The main entrypoint of the module. For a simple module, this
-    may be where all the resources are created. For a complex module, resource
-    creation may be split into multiple files but any nested module calls should
-    be in the main file.
-  2. `variables.tf`: Contains all variable declarations. If no variables are
-     defined, this file should still exist and be empty.
-  3. `outputs.tf`: Contains all output variable declarations. If no outputs are
-     defined, this file should still exist and be empty.
-  4. `versions.tf`: Contains any `terraform {}` block configurations required by
-     the module, such as `required_provider` blocks. If no configurations are
-     defined, this file should still exist and be empty.
+    1. `main.tf`: The main entrypoint of the module. For a simple module, this
+          may be where all the resources are created. For a complex module, resource
+          creation may be split into multiple files but any nested module calls should
+          be in the main file.
+    2. `variables.tf`: Contains all variable declarations. If no variables are
+           defined, this file should still exist and be empty.
+    3. `outputs.tf`: Contains all output variable declarations. If no outputs are
+           defined, this file should still exist and be empty.
+    4. `versions.tf`: Contains any `terraform {}` block configurations required by
+           the module, such as `required_provider` blocks. If no configurations are
+           defined, this file should still exist and be empty.
 
 4. All variables and outputs should have descriptions.
 
 5. `LICENSE`: The license under which this module is available. If you are publishing
-  a module publicly, many organizations will not adopt a module unless a clear
-  license is present. We recommend always having a license file, even if it is
-  not an open source license.
+    a module publicly, many organizations will not adopt a module unless a clear
+    license is present. We recommend always having a license file, even if it is
+    not an open source license.
 
 6. `modules/`: Nested modules should exist under this subdirectory. If the root
-  module includes calls to nested modules, they should use relative paths
-  like `./modules/module_a` so that Terraform will consider them to be part
-  of the same repository or package, rather than downloading them again separately.
+    module includes calls to nested modules, they should use relative paths
+    like `./modules/module_a` so that Terraform will consider them to be part
+    of the same repository or package, rather than downloading them again separately.
 
 7. `examples/`: Examples of using the module should exist under the `examples/`
-  subdirectory at the root of the repository. Each example may have a `README.md`
-  to explain the goal and usage of the example. Examples for submodules should
-  also be placed in the root `examples/` directory.
+    subdirectory at the root of the repository. Each example may have a `README.md`
+    to explain the goal and usage of the example. Examples for submodules should
+    also be placed in the root `examples/` directory.
 
 ## [Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)
 
@@ -117,7 +118,8 @@ The `source` argument has different specifications for different module sources.
 ### Local paths
 
 The `source` argument is a relative path:
-```
+
+```terraform
 module "foo" {
   source = "./foo"
 
@@ -128,7 +130,8 @@ module "foo" {
 ### Public terraform registry
 
 The `source` argument is the module name of the form `<NAMESPACE>/<NAME>/<PROVIDER>`:
-```
+
+```terraform
 module "foo" {
   source  = "foo/bar/aws"
   version = "x.y.z"
@@ -140,7 +143,8 @@ module "foo" {
 ### Privately hosted terraform registry
 
 The `source` argument includes a hostname prefix:
-```
+
+```terraform
 module "foo" {
   source = "<hostname>/azurerm"
   version = "1.1.0"
@@ -150,18 +154,21 @@ module "foo" {
 ### Github
 
 The `source` argument is either:
+
 - a github URL, in which case it will clone via HTTPS
 - the girhub SSH address
 
 HTTPS:
-```
+
+```terraform
 module "foo" {
   source = "github.com/foo-account/foo"
 }
 ```
 
 SSH:
-```
+
+```terraform
 module "foo" {
   source = "git@github.com:foo-account/foo.git"
 }
@@ -173,18 +180,21 @@ Only SSH can be configured with Terraform Cloud.
 ### Generic git repository
 
 The `source` argument is either:
+
 - a github URL, in which case it will clone via HTTPS
 - the girhub SSH address
 
 HTTPS:
-```
+
+```terraform
 module "foo" {
   source = "git::https://some-url.com/foo.git"
 }
 ```
 
 SSH:
-```
+
+```terraform
 module "foo" {
   source = "git::ssh://username@some-url.com/foo.git"
 }
@@ -200,6 +210,6 @@ A utility to generate documentation from Terraform modules in various output for
 The simplest case creates a `README.md` with tables for requirements,
 providers, input variables and output variables:
 
-```
+```terraform
 terraform-docs markdown table --output-file README.md .
 ```

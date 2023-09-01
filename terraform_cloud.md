@@ -4,8 +4,7 @@
 
 ### Common features
 
-- Remote state management instead of using other `backend` types. Allows for
-  storing multiple timestamped state files. This is helpful especially for
+- Remote state management instead of using other `backend` types. Allows for storing multiple timestamped state files. This is helpful especially for
   rolling back to past states if some state file manipulation is not successful.
 - Access state from other workspaces using terraform cloud data sources.
 - Remove execution of terraform scripts on terraform cloud agents
