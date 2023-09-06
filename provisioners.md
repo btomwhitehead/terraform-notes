@@ -43,13 +43,10 @@ resource "aws_instance" "this" {
 ```
 
 - command: The command to execute.
-- `working_dir`: If provided, specifies the working directory where command will
-  be executed.
-- `interpreter`: A list of interpreter arguments used to execute the command,
-  e.g. `interpreter = ["/bin/bash", "-c"]`.
-- `environment`: Block of key value pairs representing the environment of the
-  executed command. inherits the current process environment. E.g.
-  `environment = {FOO = "bar"}`.
+- `working_dir`: If provided, it specifies the working directory where command will be executed.
+- `interpreter`: A list of interpreter arguments used to execute the command, e.g. `interpreter = ["/bin/bash", "-c"]`.
+- `environment`: Block of key value pairs representing the environment of the executed command.
+  inherits the current process environment. E.g. `environment = {FOO = "bar"}`.
 
 ### [remote-exec](https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec)
 
