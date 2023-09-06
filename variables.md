@@ -17,13 +17,13 @@ Typical example:
 ```terraform
 variable "some_variable_name" {
   type        = <data type>
-  description = <some readeable description>
+  description = <some readable description>
   default     = <some sane default>
 
   # Additional fields
   validation = <some HCL validation rule, in addition to type constraint>
   sensitive  = <Redact this field in all terraform console / cloud output>
-  nullable   = <Sepecify if the variable can be set to null, defaults to true>
+  nullable   = <Specify if the variable can be set to null, defaults to true>
 }
 ```
 
@@ -43,9 +43,11 @@ output "some_name" {
 
   # Additional fields
   sensitive  = <Redact this field in all terraform console / cloud output>
-  depends_on = <Resource ID that must be created before this resource, only use as a last resort when dependencies cannot be inferred>
+  depends_on = <Resource ID that must be created before this resource>
 }
 ```
+
+only use depends on as a last resort when dependencies cannot be inferred.
 
 ## [Local values](https://developer.hashicorp.com/terraform/language/values/locals)
 
