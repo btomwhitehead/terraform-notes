@@ -3,11 +3,11 @@
 Terraform relies on plugins called providers to interact with cloud providers, SaaS providers, and other APIs.
 
 Each provider adds a set of resource types and/or data sources that Terraform can manage and most providers
-are dedicated a single infrastructure platform.
+are dedicated to a single infrastructure platform.
 
 Some providers exist to provide utility functions such as generating strings or making API calls.
 
-Providers are versioned and disitributed independently of Terraform itself and are commonly distributed through the
+Providers are versioned and distributed independently of Terraform itself and are commonly distributed through the
 [Terraform Registry](https://registry.terraform.io/).
 
 Each provider has its own versioned documentation, describing its resource types and their arguments.

@@ -36,8 +36,8 @@ like resources, input variables, etc. are all identifiers.
 
 ### Comments
 
-Use `#` for single line by default. Terraform will also accept
-`//` for single lines, `/*` and `*/` for multi-line.
+Use `#` for single line commends by default. Terraform will also accept
+`//` for single line comments, `/*` and `*/` for multi-line.
 
 ## Expressions
 
@@ -85,7 +85,7 @@ Quotes strings use backslashes for escape sequences with some common special cha
 
 #### Heredoc Strings
 
-Terraform supports indented Heredoc strings as well as the usual undindented kind, for example:
+Terraform supports indented Heredoc strings as well as the usual unindented kind, for example:
 
 ```terraform
 block {
@@ -109,9 +109,12 @@ Hererdocs also support the last two escape sequences above, `$${`, and `%%{`.
 
 Templates let you directly embed expressions into a string literal, to dynamically construct strings from other values.
 
-A `${ ... }` sequence is an interpolation, which evaluates the expression given between the markers. For example `"Hello, ${var.name}!"` with `var.name = "Tom"` produces `"Hello, Tom!"`.
+A `${ ... }` sequence is an interpolation, which evaluates the expression given between the markers. For example
+`"Hello, ${var.name}!"` with `var.name = "Tom"` produces `"Hello, Tom!"`.
 
-A `%{ ... }` sequence is a directive, which allows for conditional results and iteration over collections. For example `"Hello, %{ if var.name != "" }${var.name}%{ else }unnamed%{ endif }!"` with `var.name = "Tom"` returns `"Hello, Tom!"` and with `var.name = ""` returns `"Hello, unnnamed!"`.
+A `%{ ... }` sequence is a directive, which allows for conditional results and iteration over collections. For example
+`"Hello, %{ if var.name != "" }${var.name}%{ else }unnamed%{ endif }!"` with `var.name = "Tom"` returns `"Hello, Tom!"`
+and with `var.name = ""` returns `"Hello, unnamed!"`.
 
 ### [Conditionals](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
@@ -205,14 +208,14 @@ var.list[*].id
 
 ### [Dynamic blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks)
 
-Dynamically construct repeateable nested blocks using an iterator over a list or map variable.
+Dynamically construct repeatable nested blocks using an iterator over a list or map variable.
 
 If `iterator` is not specified, it will default to the name of the dynamic block
 being created.
 
 ```terraform
 variable "sg_groups" {
-  type = list(nunmber)
+  type = list(number)
   default = [8200, 8201, 8203]
 }
 

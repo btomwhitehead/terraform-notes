@@ -3,12 +3,16 @@
 Terraform requires some mechanism to map config to the real world.
 
 Terraform expects that each remote object is bound to only one resource instance in the configuration.
-If a remote object is bound to multiple resource instances, the mapping from configuration to the remote object in the state becomes ambiguous, and Terraform may behave unexpectedly.
+If a remote object is bound to multiple resource instances, the mapping from configuration to the remote object in the
+state becomes ambiguous, and Terraform may behave unexpectedly.
 
 Alongside the mappings between resources and remote objects, Terraform also tracks metadata such as resource dependencies.
-This is required to understand what resources may need to be modified once an upstream dependency changes as well as determining which order changes need to be applied in. For instance, a virtual network must be created before a subnet on it.
+This is required to understand what resources may need to be modified once an upstream dependency changes as well as
+determining which order changes need to be applied in. For instance, a virtual network must be created before a subnet on
+it.
 
-Additionally, terraform caches resource attribute values in the state file to improve performance. This is most important when using large configurations as querying every resource's attributes is time consuming.
+Additionally, terraform caches resource attribute values in the state file to improve performance. This is most important
+when using large configurations as querying every resource's attributes is time consuming.
 
 State files are stored in a [backend](#backends) in `json` format.
 
@@ -90,7 +94,8 @@ using `terraform init`.
 
 ## State file locking
 
-Whenever a write operation is being performed, terraform locks the state file to ensure that it is not corrupted by an apply at the same time.
+Whenever a write operation is being performed, terraform locks the state file to ensure that it is not corrupted by an
+apply at the same time.
 
 State file locking is implemented differently for different backends. Some do not support state locking at all.
 
@@ -132,9 +137,11 @@ lock is released.
 
 ### [`remote`](https://developer.hashicorp.com/terraform/language/settings/backends/remote)
 
-The remote backend is unique among all other Terraform backends because it can both store state snapshots and execute operations for Terraform Cloud's CLI-driven run workflow.
+The remote backend is unique among all other Terraform backends because it can both store state snapshots and execute
+operations for Terraform Cloud's CLI-driven run workflow.
 
-As of Terraform v1.1.0 and Terraform Enterprise v202201-1, it is recommended to use [Terraform Cloud](./terraform_cloud.md) instead of this backend.
+As of Terraform v1.1.0 and Terraform Enterprise v202201-1, it is recommended to use
+[Terraform Cloud](./terraform_cloud.md) instead of this backend.
 
 ### [`s3`](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
 
@@ -153,17 +160,22 @@ terraform {
 }
 ```
 
-Note that the access credentials need to also be supplied via some mechanism. This mostly aligns with the authentication method used when configuring the primary cloud provider.
+Note that the access credentials need to also be supplied via some mechanism. This mostly aligns with the
+authentication method used when configuring the primary cloud provider.
 
-This backend supports [state locking via Dynamo DB](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-state-locking)
-by setting the `dynamodb_table` field to an existing DynamoDB table name. The table requires a string primary key field called `LockID` to work correctly.
-Additional [DynamoDB permissions](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-table-permissions) and other configurations are required.
+This backend supports
+[state locking via Dynamo DB](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-state-locking)
+by setting the `dynamodb_table` field to an existing DynamoDB table name. The table requires a string primary key field
+called `LockID` to work correctly. Additional
+[DynamoDB permissions](https://developer.hashicorp.com/terraform/language/settings/backends/s3#dynamodb-table-permissions)
+and other configurations are required.
 
 ### [`azurerm`](https://developer.hashicorp.com/terraform/language/settings/backends/azurerm)
 
-Stores the state as a Blob with the given Key within the Blob Container within the Blob Storage Account. This backend supports state locking with built in blob storage lease capabilities.
+Stores the state as a Blob with the given Key within the Blob Container within the Blob Storage Account. This backend supports
+state locking with built in blob storage lease capabilities.
 
-Configuration wth service principal:
+Configuration with service principal:
 
 ```terraform
 terraform {
@@ -180,7 +192,8 @@ terraform {
 
 The [terraform provider](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs)
 [`terraform_remote_state` data source](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state)
-uses the latest state snapshot from a specified state backend to retrieve the root module output values from some other Terraform configuration.
+uses the latest state snapshot from a specified state backend to retrieve the root module output values from some other
+Terraform configuration.
 
 For example, query another state using:
 
@@ -225,14 +238,18 @@ resource "aws_instance" "bar" {
 
 ## Terraform import
 
-`terraform import` lets you bring existing resources under terraform management by importing the resources into the state. It cannot generate terraform configurations and the user is required to define it.
+`terraform import` lets you bring existing resources under terraform management by importing the resources into the
+state. It cannot generate terraform configurations and the user is required to define it.
 
 ### Workflow
 
 1. Identify the existing infrastructure you will import.
 2. Create configurations for the infrastructure that you wish to import by defining resource blocks.
-3. Import infrastructure into your Terraform state file using `terraform import <terraform resource ID> <provider resource ID>`. E.g. `terraform import aws_instance.this i-0f3ea6...`.
-4. Run a `terraform plan` and update the terraform configuration so that it matches matches that infrastructure and no changes are suggested by the plan.
+3. Import infrastructure into your Terraform state file using
+  `terraform import <terraform resource ID> <provider resource ID>`.
+  E.g. `terraform import aws_instance.this i-0f3ea6...`.
+4. Run a `terraform plan` and update the terraform configuration so that it matches the desired infrastructure and no changes
+  are suggested by the plan.
 5. Apply the configuration to update your Terraform state.
 
 See [tutorial](https://developer.hashicorp.com/terraform/tutorials/state/state-import) for an example of the workflow.
@@ -247,9 +264,10 @@ latest available version subject to its version constraints.
 
 A dependency lock file is created by running `terraform init` and is stored as `.terraform.lock.hcl` in the root of the script.
 
-If a particular provider has no existing recorded selection, Terraform will select the newest available version that matches the given
-version constraint, and then update the lock file to include that selection. If a particular provider already has a selection recorded
-in the lock file, Terraform will always re-select that version for installation, even if a newer version has become available. You can
-override that behavior with `terraform init -upgrade`, in which case Terraform will disregard the existing selections.
+If a particular provider has no existing recorded selection, Terraform will select the newest available version
+that matches the given version constraint, and then update the lock file to include that selection. If a particular
+provider already has a selection recorded in the lock file, Terraform will always re-select that version for
+installation, even if a newer version has become available. You can override that behavior with
+`terraform init -upgrade`, in which case Terraform will disregard the existing selections.
 
 For further information see the [Dependency lock file docs](https://developer.hashicorp.com/terraform/language/files/dependency-lock).

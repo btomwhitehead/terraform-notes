@@ -53,8 +53,8 @@ generate documentation, index modules for the module registry, and more.
 
 ## [Module composition](https://developer.hashicorp.com/terraform/language/modules/develop/composition)
 
-The use of modules transform the configuration from a flat strcture to a
-heirachal structure as each module has its own set of resources and
+The use of modules transform the configuration from a flat structure to a
+hierarchical structure as each module has its own set of resources and
 possibly child modules.
 
 In most cases it is strongly recommended to keep the module tree flat,
@@ -145,7 +145,7 @@ module "foo" {
 The `source` argument is either:
 
 - a github URL, in which case it will clone via HTTPS
-- the girhub SSH address
+- the github SSH address
 
 HTTPS:
 
@@ -171,7 +171,7 @@ Only SSH can be configured with Terraform Cloud.
 The `source` argument is either:
 
 - a github URL, in which case it will clone via HTTPS
-- the girhub SSH address
+- the github SSH address
 
 HTTPS:
 
