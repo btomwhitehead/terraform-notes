@@ -25,9 +25,8 @@ Other useful commands:
 
 ## terraform `plan` and `apply` CLI
 
-The following options customize how Terraform will produce its plan. You
-can also use these options when you run "terraform apply" without passing
-it a saved plan, in order to plan and apply in a single command.
+The following options customize how Terraform will produce its plan. You can also use these options when you run
+"terraform apply" in order to plan and apply in a single command.
 
 - `-destroy`            Select the "destroy" planning mode, which creates a plan
                         to destroy all objects currently managed by this
@@ -91,3 +90,6 @@ Config logging via environment variables:
 
 - `TF_LOG`: One of `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`
 - `TF_LOG_PATH`= Path, e.g. `./terraform.log`
+
+Note: if you are using a Terraform Cloud remote backend, these variables have to be set on the remote machine. This can
+be done on the target workspace Terraform Cloud app.
